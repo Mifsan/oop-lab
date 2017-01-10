@@ -2,7 +2,7 @@
 class CRational
 {
 public:
-	CRational(int numerator = 0, int denominator = 0);
+	CRational(int numerator = 0, int denominator = 1);
 	int GetNumerator()const;
 	int GetDenominator() const;
 	double CRational::ToDouble() const;

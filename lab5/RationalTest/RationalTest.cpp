@@ -29,17 +29,17 @@ BOOST_AUTO_TEST_CASE(is_0_by_default)
 
 BOOST_AUTO_TEST_CASE(can_be_constructed_from_integer)
 {
-	VerifyRational(CRational(_MAX_INT_DIG), _MAX_INT_DIG, 1);
+	VerifyRational(CRational(-_MAX_INT_DIG), -_MAX_INT_DIG, 1);
 	VerifyRational(CRational(_MAX_INT_DIG), _MAX_INT_DIG, 1);
 	VerifyRational(CRational(0), 0, 1);
 }
 
 BOOST_AUTO_TEST_CASE(can_be_constructed_with_numerator_and_denominator)
 {
-	VerifyRational(CRational(10, 2), 10, 2);
-	VerifyRational(CRational(-10, 2), -10, 2);
-	VerifyRational(CRational(10, -2), -10, 2);
-	VerifyRational(CRational(-10, -2), 10, 2);
+	VerifyRational(CRational(10, 3), 10, 3);
+	VerifyRational(CRational(-10, 3), -10, 3);
+	VerifyRational(CRational(10, -3), -10, 3);
+	VerifyRational(CRational(-10, -3), 10, 3);
 }
 
 BOOST_AUTO_TEST_CASE(is_normalized_after_construction)
