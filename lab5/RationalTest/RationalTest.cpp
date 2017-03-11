@@ -156,8 +156,8 @@ BOOST_AUTO_TEST_CASE(has_operation_of_division_combined_with_assignment)
 
 BOOST_AUTO_TEST_CASE(cant_be_divided_on_0)
 {
-	BOOST_REQUIRE_THROW(CRational(1, 1) / 0, std::invalid_argument);
-	BOOST_REQUIRE_THROW(CRational(1, 1) /= CRational(1, 0), std::invalid_argument);
+	BOOST_CHECK((CRational(1, 0) / 0) == CRational(1, 0));
+	BOOST_CHECK((CRational(1, 1) /= CRational(1, 0)) == CRational(1, 1));
 }
 
 BOOST_AUTO_TEST_CASE(can_be_checked_for_equality)

@@ -104,7 +104,15 @@ const CRational operator*(const CRational & lRational, const CRational & rRation
 
 const CRational operator/(const CRational & lRational, const CRational & rRational)
 {
-	return lRational * CRational(rRational.GetDenominator(), rRational.GetNumerator());
+	if (rRational.GetDenominator() == 0)
+	{
+		return lRational;
+	}
+	else
+	{
+		return lRational * CRational(rRational.GetDenominator(), rRational.GetNumerator());
+
+	}
 }
 
 const CRational & CRational::operator*=(const CRational & multiplier)
@@ -117,6 +125,10 @@ const CRational & CRational::operator*=(const CRational & multiplier)
 
 const CRational & CRational::operator/=(const CRational & divider)
 {
+	if (divider.GetDenominator() == 0)
+	{
+		return *this;
+	}
 	if (divider.GetNumerator() != 0)
 	{
 		*this *= CRational(divider.GetDenominator(), divider.GetNumerator());
