@@ -51,9 +51,9 @@ BOOST_AUTO_TEST_CASE(is_normalized_after_construction)
 	VerifyRational(CRational(-10, 20), -1, 2);
 }
 
-BOOST_AUTO_TEST_CASE(cant_have_zero_denominator)
+BOOST_AUTO_TEST_CASE(is_equal_to_zero_if_the_denominator_is_zero)
 {
-	BOOST_REQUIRE_THROW(CRational(1, 0), std::invalid_argument);
+	VerifyRational(CRational(5, 0), 0, 0);
 }
 
 BOOST_AUTO_TEST_CASE(can_be_converted_to_double)

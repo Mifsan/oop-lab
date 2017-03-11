@@ -7,7 +7,8 @@ CRational::CRational(int numerator, int denominator)
 {
 	if (denominator == 0)
 	{
-		throw std::invalid_argument("Denominator must not be equal to zero");
+		m_numerator = 0;
+		m_denominator = 0;
 	}
 	if (denominator < 0)
 	{
