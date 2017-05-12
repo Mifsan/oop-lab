@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE(has_operation_of_division_combined_with_assignment)
 	VerifyRational(CRational(1, 2) /= CRational(1, 2), 1, 1);
 }
 
-BOOST_AUTO_TEST_CASE(cant_be_divided_on_0)
+BOOST_AUTO_TEST_CASE(cant_be_divided_by_0) // »—œ–¿¬»“‹!
 {
 	BOOST_CHECK((CRational(1, 0) / 0) == CRational(1, 0));
 	BOOST_CHECK((CRational(1, 1) /= CRational(1, 0)) == CRational(1, 1));

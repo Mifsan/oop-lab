@@ -5,13 +5,13 @@ public:
 	CRational(int numerator = 0, int denominator = 1);
 	int GetNumerator()const;
 	int GetDenominator() const;
-	double CRational::ToDouble() const;
-	const CRational CRational::operator+() const;
-	const CRational CRational::operator-() const;
-	const CRational & CRational::operator+=(const CRational & summand);
-	const CRational & CRational::operator-=(const CRational & sub);
-	const CRational & CRational::operator*=(const CRational & multiplier);
-	const CRational & CRational::operator/=(const CRational & divider);
+	double ToDouble() const;
+	const CRational operator+() const;
+	const CRational operator-() const;
+	const CRational & operator+=(const CRational & summand);
+	const CRational & operator-=(const CRational & sub);
+	const CRational & operator*=(const CRational & multiplier);
+	const CRational & operator/=(const CRational & divider);
 	std::pair<int, CRational> ToCompoundFraction()const;
 private:
 	int m_numerator;

@@ -33,7 +33,6 @@ int CRational::GetDenominator() const
 	return m_denominator;
 }
 
-
 void CRational::Normalize()
 {
 	const int gcd = GCD(abs(m_numerator), m_denominator);
