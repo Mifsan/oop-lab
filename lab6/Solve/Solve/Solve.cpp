@@ -2,20 +2,16 @@
 //
 
 #include "stdafx.h"
+#include "Solve.h"
 #include <stdexcept>
 #include <iostream>
 
-struct EquationRoots
-{
-	int numRoots;
-	double roots[2];
-};
 
 void CheckCoefficient(double b)
 {
 	if (b == 0)
 	{
-		throw std::invalid_argument("The coefficient of the x^2 can not be 0");
+		throw std::invalid_argument("The coefficient of the x^2 can not be 0\n");
 	}
 }
 
@@ -23,7 +19,7 @@ double CheckDescriminant(double descriminant)
 {
 	if (descriminant < 0)
 	{
-		throw std::domain_error("The equation has no roots");
+		throw std::domain_error("The equation has no roots\n");
 	}
 	return descriminant;
 }
@@ -32,7 +28,7 @@ EquationRoots Solve(double a, double b, double c)
 {
 	try
 	{
-		CheckCoefficient(b);
+		CheckCoefficient(a);
 		EquationRoots EquationShouldBeSolved;
 		double descriminant = pow(b, 2) - 4 * a * c;
 		CheckDescriminant(descriminant);
@@ -52,11 +48,6 @@ EquationRoots Solve(double a, double b, double c)
 	catch (...)
 	{
 		std::cout << "Unable to solve equation\n";
+		throw;
 	}
 }
-
-int main()
-{
-    return 0;
-}
-
