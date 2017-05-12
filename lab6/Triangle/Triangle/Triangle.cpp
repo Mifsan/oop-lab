@@ -37,16 +37,20 @@ void CheckSides(double side1, double side2, double side3)
 {
 	if (SideIsNegativeNumber(side1) || SideIsNegativeNumber(side2) || SideIsNegativeNumber(side3))
 	{
-		throw std::invalid_argument("Argument must not be negative");
+		throw std::invalid_argument("Argument must not be negative\n");
 	}
 	if (SumOfTwoSidesIsLessThanTheThird(side1, side2, side3))
 	{
-		throw std::domain_error("One of the sides of the triangle is larger than the sum of the other two sides");
+		throw std::domain_error("One of the sides of the triangle is larger than the sum of the other two sides\n");
 	}
 	if (SumOfTwoSidesEqualToTheThird(side1, side2, side3) || SumOfTwoSidesEqualToTheThird(side2, side1, side3) || SumOfTwoSidesEqualToTheThird(side3, side1, side2))
 	{
-		throw std::domain_error("Only one side in a degenerate triangle can be equal to the sum of the other two sides");
+		throw std::domain_error("Only one side in a degenerate triangle can be equal to the sum of the other two sides\n");
 	}
+}
+
+CTriangle::CTriangle()
+{
 }
 
 CTriangle::CTriangle(double side1, double side2, double side3)

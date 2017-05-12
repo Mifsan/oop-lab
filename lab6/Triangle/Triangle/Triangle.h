@@ -3,6 +3,7 @@
 class CTriangle
 {
 public:
+	CTriangle();
 	CTriangle(double side1, double side2, double side3);
 	double GetSide1()const;
 	double GetSide2()const;
