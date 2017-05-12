@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 	set<int> primeNumbers = GeneratePrimeNumbersSet(atoi(argv[1]));
 	copy(primeNumbers.begin(), primeNumbers.end(), ostream_iterator<int>(cout, " "));
 	cout << endl;
-    return 0;
+	return 0;
 }
 
 bool CheckArgument(const char* arg)

@@ -4,7 +4,7 @@
 using namespace std;
 
 CCone::CCone(double density, double radius, double height)
-	:CBody("Cone", density)
+	: CBody("Cone", density)
 {
 	if (radius < 0 || height < 0)
 	{

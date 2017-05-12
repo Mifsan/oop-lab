@@ -1,6 +1,3 @@
-// firstTask.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include "VectorProcess.h"
 
@@ -14,6 +11,5 @@ int main()
 	copy(vectorOfFloats.begin(), vectorOfFloats.end(), ostream_iterator<float>(cout, " "));
 	cout << endl;
 	system("pause");
-    return 0;
+	return 0;
 }
-

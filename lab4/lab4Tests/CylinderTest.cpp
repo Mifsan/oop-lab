@@ -9,7 +9,7 @@ struct Cylinder_
 	const double expectedVolume = (pow(expectedBaseRadius, 2) * M_PI) * expectedHeight;
 	const CCylinder cylinder;
 	Cylinder_()
-		:cylinder(expectedDensity, expectedBaseRadius, expectedHeight)
+		: cylinder(expectedDensity, expectedBaseRadius, expectedHeight)
 	{}
 };
 

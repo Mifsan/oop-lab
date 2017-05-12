@@ -10,7 +10,7 @@ struct Parallelepiped_
 	const double expectedVolume = expectedWidth * expectedHeight * expectedDepth;
 	const CParallelepiped sparallelepiped;
 	Parallelepiped_()
-		:sparallelepiped(expectedDensity, expectedWidth, expectedHeight, expectedDepth)
+		: sparallelepiped(expectedDensity, expectedWidth, expectedHeight, expectedDepth)
 	{}
 };
 

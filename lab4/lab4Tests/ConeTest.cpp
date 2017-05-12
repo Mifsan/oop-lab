@@ -9,7 +9,7 @@ struct Cone_
 	const double expectedVolume = (pow(expectedBaseRadius, 2) * M_PI) * expectedHeight / 3;
 	const CCone cone;
 	Cone_()
-		:cone(expectedDensity, expectedBaseRadius, expectedHeight)
+		: cone(expectedDensity, expectedBaseRadius, expectedHeight)
 	{}
 };
 

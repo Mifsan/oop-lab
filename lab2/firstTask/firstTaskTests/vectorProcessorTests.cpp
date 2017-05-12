@@ -8,10 +8,8 @@ bool VectorsAreEqual(vector<float> const& x, vector<float> const& y)
 	return x == y;
 }
 
-// Функция ProcessVector
 BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 
-// Создает пустой вектор из пустого вектора
 BOOST_AUTO_TEST_CASE(makes_empty_vector_from_empty_vector)
 {
 	vector<float> emptyVector;
@@ -19,18 +17,17 @@ BOOST_AUTO_TEST_CASE(makes_empty_vector_from_empty_vector)
 	BOOST_CHECK(emptyVector.empty());
 }
 
-// не изменяет содержимое вектора, который не содержит положительных чисел
+
 BOOST_AUTO_TEST_CASE(does_not_change_vector_containing_no_positive_numbers)
 {
 	vector<float> numbers = { -4, 0, -3 };
-	auto copy(numbers); // аналог vector<float> copy(numbers);
+	auto copy(numbers);
 	ProcessVector(numbers);
 	BOOST_CHECK(numbers == copy);
 }
 
-// при обработке вектора с одним положительным числом
 BOOST_AUTO_TEST_SUITE(when_processing_a_vector_with_one_positive_number)
-// должна добавить это число ко всем элементам вектора
+
 BOOST_AUTO_TEST_CASE(should_add_this_number_to_each_element)
 {
 	vector<float> numbers = { -1, 3.5 };
@@ -39,14 +36,11 @@ BOOST_AUTO_TEST_CASE(should_add_this_number_to_each_element)
 	BOOST_CHECK(VectorsAreEqual(numbers,
 	{ (-1 + 3.5), (3.5 + 3.5) }
 	));
-	// Аналогично следующей инструкции:
-	// BOOST_CHECK(numbers == vector<float>({ (-1 + 3.5), (3.5 + 3.5) }));
 }
 BOOST_AUTO_TEST_SUITE_END()
 
-// при обработке вектора с несколькими положительными элементами
 BOOST_AUTO_TEST_SUITE(when_processing_a_vector_with_several_positive_elements)
-// должен добавить их среднее арифметическое к каждому элементу
+
 BOOST_AUTO_TEST_CASE(should_add_their_average_to_each_element)
 {
 	vector<float> numbers = { -1, 1, 2, 3 };

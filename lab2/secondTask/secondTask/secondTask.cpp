@@ -15,6 +15,6 @@ int main()
 		htmlString = HtmlDecode(htmlString);
 		cout << htmlString << "\n";
 	}
-    return 0;
+	return 0;
 }
 

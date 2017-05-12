@@ -4,7 +4,7 @@
 using namespace std;
 
 CCylinder::CCylinder(double density, double radius, double height)
-	:CBody("Cylinder", density)
+	: CBody("Cylinder", density)
 {
 	if (radius < 0 || height < 0)
 	{

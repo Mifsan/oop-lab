@@ -9,7 +9,7 @@ struct Sphere_
 	const double expectedVolume = (pow(expectedRadius, 3) * M_PI) * 4 / 3;
 	const CSphere sphere;
 	Sphere_()
-		:sphere(expectedDensity, expectedRadius)
+		: sphere(expectedDensity, expectedRadius)
 	{}
 };
 

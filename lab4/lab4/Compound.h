@@ -4,6 +4,7 @@ class CCompound final: public CBody
 {
 public:
 	CCompound();
+
 	bool AddChildBody(std::shared_ptr<CBody> const &element);
 	double GetVolume() const override;
 	double GetMass() const override;

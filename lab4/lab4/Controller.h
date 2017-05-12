@@ -19,7 +19,6 @@ public:
 	void PrintAllBodies(std::vector<std::shared_ptr<CBody>> const& bodies);
 	void FindBodyWithMaxMass(std::vector<std::shared_ptr<CBody>> const& bodies);
 	void FindBodyWithSmallestWeight(std::vector<std::shared_ptr<CBody>> const& bodies);
-
 private:
 	bool CreateSphere(std::istream& args);
 	bool CreateParallelepiped(std::istream& args);

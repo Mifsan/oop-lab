@@ -4,7 +4,7 @@
 using namespace std;
 
 CParallelepiped::CParallelepiped(double density, double width, double height, double depth)
-	:CBody("Parallelepiped", density)
+	: CBody("Parallelepiped", density)
 {
 	if (width < 0 || height < 0 || depth < 0)
 	{
