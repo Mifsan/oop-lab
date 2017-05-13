@@ -19,7 +19,7 @@ double CheckDescriminant(double descriminant)
 {
 	if (descriminant < 0)
 	{
-		throw std::domain_error("The equation has no roots\n");
+		throw std::domain_error("The equation has no roots\n	");
 	}
 	return descriminant;
 }
