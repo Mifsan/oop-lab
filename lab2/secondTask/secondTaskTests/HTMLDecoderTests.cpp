@@ -10,11 +10,6 @@ BOOST_AUTO_TEST_CASE(return_empty_string_if_input_are_empty_string)
 	BOOST_CHECK_EQUAL(HtmlDecode(""), "");
 }
 
-BOOST_AUTO_TEST_CASE(rename_me)
-{
-	BOOST_CHECK_EQUAL(HtmlDecode("aaa &amp;amp; bbb"), "aaa &amp; bbb");
-}
-
 BOOST_AUTO_TEST_CASE(source_string_without_html)
 {
 	string strWithoutHtmlEntities = "We don`t: \"have\" HTML entities";
