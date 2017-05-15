@@ -16,7 +16,7 @@ struct Parallelepiped_
 
 BOOST_FIXTURE_TEST_SUITE(Parallelepiped_test, Parallelepiped_)
 
-BOOST_AUTO_TEST_CASE(is_a_body)
+BOOST_AUTO_TEST_CASE(has_a_body_type)
 {
 	BOOST_CHECK(static_cast<const CBody*>(&sparallelepiped));
 }
@@ -43,18 +43,18 @@ BOOST_AUTO_TEST_CASE(has_a_density)
 
 BOOST_AUTO_TEST_CASE(has_a_volume)
 {
-	BOOST_CHECK_CLOSE_FRACTION(static_cast<const CBody &>(sparallelepiped).GetVolume(), expectedVolume, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(sparallelepiped.GetVolume(), expectedVolume, 1e-7);
 }
 
 BOOST_AUTO_TEST_CASE(has_a_mass)
 {
-	BOOST_CHECK_CLOSE_FRACTION(static_cast<const CBody &>(sparallelepiped).GetMass(), expectedVolume * expectedDensity, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(sparallelepiped.GetMass(), expectedVolume * expectedDensity, 1e-7);
 }
 
 BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 {
 	const std::string expectedString = "Parallelepiped:\n\tdensity = 20\n\tvolume = 80\n\tmass = 1600\n\twidth = 8\n\theight = 5\n\tdepth = 2\n";
-	BOOST_CHECK_EQUAL(static_cast<const CBody &>(sparallelepiped).ToString(), expectedString);
+	BOOST_CHECK_EQUAL(sparallelepiped.ToString(), expectedString);
 }
 BOOST_AUTO_TEST_CASE(can_handle_negative_values)
 {

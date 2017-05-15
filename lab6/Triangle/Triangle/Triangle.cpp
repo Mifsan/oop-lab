@@ -6,14 +6,13 @@
 
 bool SumOfTwoSidesEqualToTheThird(double side1, double side2, double side3)
 {
-	if ((side1 + side2 == side3) && ((side1 + side3 == side2) || (side2 + side3 == side1)))
+	if ((side1 + side2 == side3) 
+		&& ((side1 + side3 == side2) 
+		|| (side2 + side3 == side1)))
 	{
 		return true;
 	}
-	else
-	{
 		return false;
-	}
 }
 
 bool SumOfTwoSidesIsLessThanTheThird(double side1, double side2, double side3)
@@ -22,20 +21,19 @@ bool SumOfTwoSidesIsLessThanTheThird(double side1, double side2, double side3)
 	{
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 bool SideIsNegativeNumber(double side)
 {
-	return (side < 0) ? true : false;
+	return side < 0;;
 }
 
 void CheckSides(double side1, double side2, double side3)
 {
-	if (SideIsNegativeNumber(side1) || SideIsNegativeNumber(side2) || SideIsNegativeNumber(side3))
+	if (SideIsNegativeNumber(side1)
+		|| SideIsNegativeNumber(side2)
+		|| SideIsNegativeNumber(side3))
 	{
 		throw std::invalid_argument("Argument must not be negative\n");
 	}
@@ -43,14 +41,12 @@ void CheckSides(double side1, double side2, double side3)
 	{
 		throw std::domain_error("One of the sides of the triangle is larger than the sum of the other two sides\n");
 	}
-	if (SumOfTwoSidesEqualToTheThird(side1, side2, side3) || SumOfTwoSidesEqualToTheThird(side2, side1, side3) || SumOfTwoSidesEqualToTheThird(side3, side1, side2))
+	if (SumOfTwoSidesEqualToTheThird(side1, side2, side3) 
+		|| SumOfTwoSidesEqualToTheThird(side2, side1, side3) 
+		|| SumOfTwoSidesEqualToTheThird(side3, side1, side2))
 	{
 		throw std::domain_error("Only one side in a degenerate triangle can be equal to the sum of the other two sides\n");
 	}
-}
-
-CTriangle::CTriangle()
-{
 }
 
 CTriangle::CTriangle(double side1, double side2, double side3)
@@ -103,7 +99,8 @@ void CTriangle::CalculateThePerimeter()
 
 void CTriangle::CalculateTheArea()
 {
-	m_area = sqrt(m_perimeter * (m_perimeter - m_side1) * (m_perimeter - m_side2) * (m_perimeter - m_side3));
+	auto halfPerimeter = m_perimeter / 2;
+	m_area = sqrt(halfPerimeter * (halfPerimeter - m_side1) * (halfPerimeter - m_side2) * (halfPerimeter - m_side3));
 }
 
 

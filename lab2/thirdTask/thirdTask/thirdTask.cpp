@@ -3,29 +3,26 @@
 
 #include "stdafx.h"
 #include "PrimeNumbersGenerator.h"
-#include <iostream>
-#include <algorithm>
 
-#include <iterator>
+static const int MAX_NUM_OF_ARG = 2;
+
+static const int MAX_DISCHARGE = 10;
+
 using namespace std;
 
-const int MAX_NUM_OF_ARG = 2;
+bool isArgCountEqualToSpecifiedNumOfArg(int argc);
 
-const int MAX_DISCHARGE = 10;
-
-bool CheckArgCount(const int& argc);
-
-bool CheckArgument(const char* arg);
+bool isArgumentLegit(char* arg);
 
 int main(int argc, char* argv[])
 {
-	if (CheckArgCount(argc))
+	if (isArgCountEqualToSpecifiedNumOfArg(argc))
 	{
 		cout << "Invalid arguments count\n"
 			<< "Usage: thirdTask.exe <Upper bound of values(max processing value: 100000000)>";
 		return 1;
 	}
-	if (!CheckArgument(argv[1]))
+	if (!isArgumentLegit(argv[1]))
 	{
 		return 1;
 	}
@@ -35,7 +32,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-bool CheckArgument(const char* arg)
+bool isArgumentLegit(char* arg)
 {
 	for (size_t i = 0; i < strlen(arg); i++)
 	{
@@ -53,8 +50,7 @@ bool CheckArgument(const char* arg)
 	return true;
 }
 
-bool CheckArgCount(const int& argc)
+bool isArgCountEqualToSpecifiedNumOfArg(int argc)
 {
 	return (argc != MAX_NUM_OF_ARG);
 }
-

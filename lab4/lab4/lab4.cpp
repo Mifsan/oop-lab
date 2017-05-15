@@ -6,18 +6,16 @@ using namespace std;
 
 int main()
 {
-	vector<shared_ptr<CBody>> bodies;
-	CController controller(bodies, cin, cout);
+	CController controller(cin, cout);
 	controller.Help();
 	while (!cin.eof() && !cin.fail())
 	{
 		cout << "> ";
 		controller.HandleCommand();
 	}
-
-	controller.PrintAllBodies(bodies);
-	controller.FindBodyWithMaxMass(bodies);
-	controller.FindBodyWithSmallestWeight(bodies);
+	controller.PrintAllBodies();
+	controller.FindBodyWithMaxMass();
+	controller.FindBodyWithSmallestWeight();
 
 	return 0;
 }

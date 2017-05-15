@@ -17,7 +17,7 @@ struct Compound_
 
 BOOST_FIXTURE_TEST_SUITE(Compound, Compound_)
 
-BOOST_AUTO_TEST_CASE(is_a_body)
+BOOST_AUTO_TEST_CASE(has_a_body_type)
 {
 	BOOST_CHECK(static_cast<const CBody*>(&compound));
 }
@@ -33,17 +33,17 @@ BOOST_FIXTURE_TEST_SUITE(When_have_no_elements, EmptyCompound_)
 
 BOOST_AUTO_TEST_CASE(density_is_zero_by_default)
 {
-	BOOST_CHECK_EQUAL(static_cast<const CBody &>(compound).GetDensity(), expectedDensity);
+	BOOST_CHECK_EQUAL(compound.GetDensity(), expectedDensity);
 }
 
 BOOST_AUTO_TEST_CASE(volume_is_zero_by_default)
 {
-	BOOST_CHECK_EQUAL(static_cast<const CBody &>(compound).GetVolume(), expectedVolume);
+	BOOST_CHECK_EQUAL(compound.GetVolume(), expectedVolume);
 }
 
 BOOST_AUTO_TEST_CASE(mass_is_zero_by_default)
 {
-	BOOST_CHECK_EQUAL(static_cast<const CBody &>(compound).GetMass(), expectedMass);
+	BOOST_CHECK_EQUAL(compound.GetMass(), expectedMass);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

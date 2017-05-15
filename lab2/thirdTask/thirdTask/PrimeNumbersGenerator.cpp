@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "PrimeNumbersGenerator.h"
 
-using namespace std;
+static const int MAX_UPPER_BOUND = 100000000;
+static const int MIN_UPPER_BOUND = 2;
 
-const int MAX_UPPER_BOUND = 100000000;
-const int MIN_UPPER_BOUND = 2;
+using namespace std;
 
 set<int> GeneratePrimeNumbersSet(int upperBound)
 {
@@ -17,7 +17,7 @@ set<int> GeneratePrimeNumbersSet(int upperBound)
 	set<int> primeNumbersSet;
 	numbers[0] = false;
 	numbers[1] = false;
-	for (int i = 2; i * i <= upperBound; i++)
+	for (int i = MIN_UPPER_BOUND; i * i <= upperBound; i++)
 	{
 		if (numbers[i])
 		{

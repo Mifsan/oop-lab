@@ -23,7 +23,7 @@ bool CCompound::AddChildBody(std::shared_ptr<CBody> const & element)
 double CCompound::GetMass() const
 {
 	double mass = 0;
-	for (auto element : m_elements)
+	for (const auto &element : m_elements)
 	{
 		mass += element->GetMass();
 	}
@@ -33,7 +33,7 @@ double CCompound::GetMass() const
 double CCompound::GetVolume() const
 {
 	double volume = 0;
-	for (auto element : m_elements)
+	for (const auto &element : m_elements)
 	{
 		volume += element->GetVolume();
 	}

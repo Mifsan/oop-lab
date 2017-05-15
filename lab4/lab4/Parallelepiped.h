@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "Body.h"
 
 class CParallelepiped final: public CBody

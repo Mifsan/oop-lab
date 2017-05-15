@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void CheckEqualEquations(EquationRoots sampleEquation, EquationRoots resultRoots)
+void CheckEqualEquations(const EquationRoots& sampleEquation, const EquationRoots& resultRoots)
 {
 	for (size_t i = 0; i < sampleEquation.numRoots; ++i)
 	{

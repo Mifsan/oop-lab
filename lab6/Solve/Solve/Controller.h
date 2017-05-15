@@ -6,12 +6,10 @@
 #include <iomanip>
 #include <map>
 #include "Solve.h"
-#include <functional>
-#include <string>
-#include <sstream>
 
 class CController
 {
+	typedef std::map<std::string, std::function<bool(std::istream& args)>> ActionMap;
 public:
 	CController(std::istream& input, std::ostream& output);
 
@@ -21,8 +19,6 @@ public:
 private:
 	
 	bool SolveTheEquation(std::istream& args);
-
-	typedef std::map<std::string, std::function<bool(std::istream& args)>> ActionMap;
 
 	std::istream& m_input;
 	std::ostream& m_output;

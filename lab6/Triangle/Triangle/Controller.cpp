@@ -49,8 +49,8 @@ bool CController::Help()
 
 void CController::PrintTriangleInfo()
 {
-	m_output << "Perimeter: " << m_triangle.GetPerimeter() << endl
-		<< "Area: " << m_triangle.GetArea() << endl;
+	m_output << "Perimeter: " << m_triangle[0].GetPerimeter() << endl
+		<< "Area: " << m_triangle[0].GetArea() << endl;
 }
 
 bool CController::CreateTriangle(std::istream & args)
@@ -69,7 +69,8 @@ bool CController::CreateTriangle(std::istream & args)
 		else
 		{
 			CTriangle currentTriangle(side1, side2, side3);
-			m_triangle = currentTriangle;
+			m_triangle.clear();
+			m_triangle.push_back(currentTriangle);
 			PrintTriangleInfo();
 			return true;
 		}

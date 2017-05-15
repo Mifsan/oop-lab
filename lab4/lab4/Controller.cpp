@@ -5,9 +5,8 @@ using namespace std;
 using namespace std::placeholders;
 
 
-CController::CController(std::vector<std::shared_ptr<CBody>>& bodies, std::istream & input, std::ostream & output)
-	: m_bodies(bodies)
-	, m_input(input)
+CController::CController(std::istream & input, std::ostream & output)
+	: m_input(input)
 	, m_output(output)
 	, m_actions({
 		{ "Help", bind(&CController::Help, this) },
@@ -18,7 +17,6 @@ CController::CController(std::vector<std::shared_ptr<CBody>>& bodies, std::istre
 		{ "Compound", bind(&CController::CreateCompoundBody, this) },
 })
 {
-
 }
 
 bool CController::HandleCommand()
@@ -58,11 +56,11 @@ bool CController::Help()
 	return true;
 }
 
-void CController::PrintAllBodies(std::vector<std::shared_ptr<CBody>> const& bodies)
+void CController::PrintAllBodies() const
 {
-	if (!bodies.empty())
+	if (!m_bodies.empty())
 	{
-		for (auto &body : bodies)
+		for (auto &body : m_bodies)
 		{
 			m_output << body->ToString();
 		}
@@ -73,12 +71,12 @@ void CController::PrintAllBodies(std::vector<std::shared_ptr<CBody>> const& bodi
 	}
 }
 
-void CController::FindBodyWithMaxMass(std::vector<std::shared_ptr<CBody>> const& bodies)
+void CController::FindBodyWithMaxMass() const
 {
-	if (!bodies.empty())
+	if (!m_bodies.empty())
 	{
-		auto maxMassBody = bodies.front();
-		for (auto body : bodies)
+		auto maxMassBody = m_bodies.front();
+		for (auto body : m_bodies)
 		{
 			if (body->GetMass() > maxMassBody->GetMass())
 			{
@@ -94,11 +92,11 @@ void CController::FindBodyWithMaxMass(std::vector<std::shared_ptr<CBody>> const&
 	}
 }
 
-void CController::FindBodyWithSmallestWeight(std::vector<std::shared_ptr<CBody>> const& bodies)
+void CController::FindBodyWithSmallestWeight() const
 {
-	if (!bodies.empty())
+	if (!m_bodies.empty())
 	{
-		auto minWeightBody = bodies.front();
+		auto minWeightBody = m_bodies.front();
 
 		const double G = 9.8;
 		const double WATER_DENSITY = 1000;
@@ -106,7 +104,7 @@ void CController::FindBodyWithSmallestWeight(std::vector<std::shared_ptr<CBody>>
 		double minWeight = (minWeightBody->GetDensity() - WATER_DENSITY) * G * minWeightBody->GetVolume();
 		double weight;
 
-		for (auto body : bodies)
+		for (auto body : m_bodies)
 		{
 			weight = (minWeightBody->GetDensity() - WATER_DENSITY) * G * minWeightBody->GetVolume();
 			if (weight < minWeight)
@@ -123,137 +121,114 @@ void CController::FindBodyWithSmallestWeight(std::vector<std::shared_ptr<CBody>>
 	}
 }
 
+std::vector<std::shared_ptr<CBody>> CController::GetVectorOfBodies() const
+{
+	return m_bodies;
+}
+
 bool CController::CreateSphere(std::istream& args)
 {
-	bool isAdded = true;
-	double density;
-	double radius;
-
-	if (!(args >> density) || !(args >> radius))
+	try
 	{
-		m_output << "Invalid count of arguments\n"
-			<< "Usage: Sphere <density> <radius>\n";
-		isAdded = false;
-	}
+		double density;
+		double radius;
 
-	if (isAdded)
-	{
-		try
+		if (!(args >> density) || !(args >> radius))
 		{
-			shared_ptr<CBody> sphere = make_shared<CSphere>(density, radius);
-			m_bodies.push_back(sphere);
+			throw std::invalid_argument("Invalid count of arguments\nUsage: Sphere <density> <radius>\n");
 		}
-		catch (invalid_argument const& e)
-		{
-			m_output << e.what();
-		}
+		shared_ptr<CBody> sphere = make_shared<CSphere>(density, radius);
+		m_bodies.push_back(sphere);
+		return true;
 	}
-	return isAdded;
+	catch (exception const& e)
+	{
+		m_output << e.what();
+		return false;
+	}
 }
 
 bool CController::CreateParallelepiped(std::istream& args)
 {
-	bool isAdded = true;
-	double density;
-	double width;
-	double height;
-	double depth;
-
-	if (!(args >> density) || !(args >> width) || !(args >> height) || !(args >> depth))
+	try
 	{
-		m_output << "Invalid count of arguments\n"
-			<< "Usage: Parallelepiped <density> <width> <height> <depth>\n";
-		isAdded = false;
-	}
+		double density;
+		double width;
+		double height;
+		double depth;
 
-	if (isAdded)
-	{
-		try
+		if (!(args >> density) || !(args >> width) || !(args >> height) || !(args >> depth))
 		{
+			throw std::invalid_argument("Invalid count of arguments\nUsage: Parallelepiped <density> <width> <height> <depth>\n");
+		}
 			shared_ptr<CBody> parallelepiped = make_shared<CParallelepiped>(density, width, height, depth);
 			m_bodies.push_back(parallelepiped);
-		}
-		catch (invalid_argument const& e)
-		{
-			m_output << e.what();
-		}
+			return true;
 	}
-	return isAdded;
+	catch (exception const& e)
+	{
+		m_output << e.what();
+		return false;
+	}
 }
 
 bool CController::CreateCone(std::istream& args)
 {
-	bool isAdded = true;
-	double density;
-	double height;
-	double radius;
-
-	if (!(args >> density) || !(args >> radius) || !(args >> height))
+	try
 	{
-		m_output << "Invalid count of arguments\n"
-			<< "Usage: Cone <density> <radius> <height>\n";
-		isAdded = false;
-	}
+		double density;
+		double height;
+		double radius;
 
-	if (isAdded)
-	{
-		try
+		if (!(args >> density) || !(args >> radius) || !(args >> height))
 		{
-			shared_ptr<CBody> cone = make_shared<CCone>(density, radius, height);
-			m_bodies.push_back(cone);
+			throw std::invalid_argument("Invalid count of arguments\nUsage: Cone <density> <radius> <height>\n");
 		}
-		catch (invalid_argument const& e)
-		{
-			m_output << e.what();
-		}
+		shared_ptr<CBody> cone = make_shared<CCone>(density, radius, height);
+		m_bodies.push_back(cone);
+		return true;
 	}
-	return isAdded;
+	catch (exception const& e)
+	{
+		m_output << e.what();
+		return false;
+	}
 }
 
 bool CController::CreateCylinder(std::istream& args)
 {
-	bool isAdded = true;
-	double density;
-	double height;
-	double radius;
-
-	if (!(args >> density) || !(args >> radius) || !(args >> height))
+	try
 	{
-		m_output << "Invalid count of arguments\n"
-			<< "Usage: Cylinder <density> <radius> <height>\n";
-		isAdded = false;
-	}
+		double density;
+		double height;
+		double radius;
 
-	if (isAdded)
-	{
-		try
+		if (!(args >> density) || !(args >> radius) || !(args >> height))
 		{
-			shared_ptr<CBody> cylinder = make_shared<CCone>(density, radius, height);
-			m_bodies.push_back(cylinder);
+			throw std::invalid_argument("Invalid count of arguments\nUsage: Cylinder <density> <radius> <height>\n");
 		}
-		catch (invalid_argument const& e)
-		{
-			m_output << e.what();
-		}
+		shared_ptr<CBody> cylinder = make_shared<CCone>(density, radius, height);
+		m_bodies.push_back(cylinder);
+		return true;
 	}
-	return isAdded;
+	catch (exception const& e)
+	{
+		m_output << e.what();
+		return false;
+	}
 }
 
 bool CController::CreateCompoundBody()
 {
-	bool isAdded = true;
 	shared_ptr<CCompound> compound = make_shared<CCompound>();
-	vector<shared_ptr<CBody>> elements;
-	CController compoundController(elements, m_input, m_output);
-
+	CController compoundController(m_input, m_output);
 	while (m_output << "> ", compoundController.HandleCommand());
 	m_output << "Finish add to compound" "\n";
-
+	auto elements = compoundController.GetVectorOfBodies();
 	for (auto element : elements)
 	{
 		compound->AddChildBody(element);
 	}
-
 	m_bodies.push_back(compound);
-	return isAdded;
+	return true;
 }

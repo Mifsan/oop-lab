@@ -1,5 +1,4 @@
-#pragma once
-#include "stdafx.h"
+#pragma 
 #include "Body.h"
 
 class CCone final: public CBody

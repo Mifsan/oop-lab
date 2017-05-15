@@ -26,6 +26,6 @@ private:
 	std::istream& m_input;
 	std::ostream& m_output;
 
-	CTriangle m_triangle;
+	std::vector<CTriangle> m_triangle;
 	const ActionMap m_actions;
 };

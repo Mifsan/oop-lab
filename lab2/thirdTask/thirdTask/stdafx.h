@@ -4,3 +4,8 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+#include <set>
+#include <vector>

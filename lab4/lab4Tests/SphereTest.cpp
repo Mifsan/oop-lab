@@ -15,7 +15,7 @@ struct Sphere_
 
 BOOST_FIXTURE_TEST_SUITE(Sphere_test, Sphere_)
 
-BOOST_AUTO_TEST_CASE(is_a_body)
+BOOST_AUTO_TEST_CASE(has_a_body_type)
 {
 	BOOST_CHECK(static_cast<const CBody*>(&sphere));
 }
@@ -32,18 +32,18 @@ BOOST_AUTO_TEST_CASE(has_a_density)
 
 BOOST_AUTO_TEST_CASE(has_a_volume)
 {
-	BOOST_CHECK_CLOSE_FRACTION(static_cast<const CBody &>(sphere).GetVolume(), expectedVolume, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(sphere.GetVolume(), expectedVolume, 1e-7);
 }
 
 BOOST_AUTO_TEST_CASE(has_a_mass)
 {
-	BOOST_CHECK_CLOSE_FRACTION(static_cast<const CBody &>(sphere).GetMass(), expectedVolume * expectedDensity, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(sphere.GetMass(), expectedVolume * expectedDensity, 1e-7);
 }
 
 BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 {
 	const std::string expectedString = "Sphere:\n\tdensity = 10\n\tvolume = 4188.790205\n\tmass = 41887.90205\n\tradius = 10\n";
-	BOOST_CHECK_EQUAL(static_cast<const CBody &>(sphere).ToString(), expectedString);
+	BOOST_CHECK_EQUAL(sphere.ToString(), expectedString);
 }
 BOOST_AUTO_TEST_CASE(can_handle_negative_values)
 {

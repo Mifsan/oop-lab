@@ -3,11 +3,9 @@
 
 #include "stdafx.h"
 #include "Solve.h"
-#include <stdexcept>
-#include <iostream>
 
 
-void CheckCoefficient(double b)
+void CheckCoefficientOfTheEquation(double b)
 {
 	if (b == 0)
 	{
@@ -19,7 +17,7 @@ double CheckDescriminant(double descriminant)
 {
 	if (descriminant < 0)
 	{
-		throw std::domain_error("The equation has no roots\n	");
+		throw std::domain_error("The equation has no roots\n");
 	}
 	return descriminant;
 }
@@ -28,22 +26,22 @@ EquationRoots Solve(double a, double b, double c)
 {
 	try
 	{
-		CheckCoefficient(a);
-		EquationRoots EquationShouldBeSolved;
+		CheckCoefficientOfTheEquation(a);
+		EquationRoots equationShouldBeSolved;
 		double descriminant = pow(b, 2) - 4 * a * c;
 		CheckDescriminant(descriminant);
 		if (descriminant == 0)
 		{
-			EquationShouldBeSolved.numRoots = 1;
-			EquationShouldBeSolved.roots[0] = -b / (2 * a);
+			equationShouldBeSolved.numRoots = 1;
+			equationShouldBeSolved.roots[0] = -b / (2 * a);
 		}
 		else if (descriminant > 0)
 		{
-			EquationShouldBeSolved.numRoots = 2;
-			EquationShouldBeSolved.roots[0] = (-b - sqrt(descriminant)) / (2 * a);
-			EquationShouldBeSolved.roots[1] = (-b + sqrt(descriminant)) / (2 * a);
+			equationShouldBeSolved.numRoots = 2;
+			equationShouldBeSolved.roots[0] = (-b - sqrt(descriminant)) / (2 * a);
+			equationShouldBeSolved.roots[1] = (-b + sqrt(descriminant)) / (2 * a);
 		}
-		return EquationShouldBeSolved;
+		return equationShouldBeSolved;
 	}
 	catch (...)
 	{

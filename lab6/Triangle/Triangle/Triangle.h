@@ -3,7 +3,6 @@
 class CTriangle
 {
 public:
-	CTriangle();
 	CTriangle(double side1, double side2, double side3);
 	double GetSide1()const;
 	double GetSide2()const;
@@ -11,7 +10,13 @@ public:
 	double GetArea()const;
 	double GetPerimeter()const;
 private:
-	double m_side1, m_side2, m_side3, m_area, m_perimeter;
 	void CalculateThePerimeter();
 	void CalculateTheArea();
+
+	double m_side1;
+	double m_side2;
+	double m_side3;
+	double m_area;
+	double m_perimeter;
+
 };

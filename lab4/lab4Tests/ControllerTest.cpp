@@ -8,7 +8,6 @@ using namespace std;
 
 struct ControllerDependencies
 {
-	vector<shared_ptr<CBody>> bodies;
 	stringstream input;
 	stringstream output;
 };
@@ -18,7 +17,7 @@ struct ControllerFixture : ControllerDependencies
 	CController controller;
 
 	ControllerFixture()
-		: controller(bodies, input, output)
+		: controller(input, output)
 	{
 	}
 
@@ -44,8 +43,8 @@ BOOST_AUTO_TEST_CASE(can_handle_sphere)
 	radius = 10
 )";
 	VerifyCommandHandling("Sphere 5 10", "");
-	BOOST_CHECK((*bodies.begin())->GetDensity() == 5);
-	BOOST_CHECK((*bodies.begin())->ToString() == expectedOutput);
+	BOOST_CHECK(controller.GetVectorOfBodies().front()->GetDensity() == 5);
+	BOOST_CHECK(controller.GetVectorOfBodies().front()->ToString() == expectedOutput);
 }
 BOOST_AUTO_TEST_CASE(can_handle_invalid_input)
 {
@@ -54,23 +53,23 @@ BOOST_AUTO_TEST_CASE(can_handle_invalid_input)
 BOOST_AUTO_TEST_CASE(can_handle_negative_density)
 {
 	VerifyCommandHandling("Sphere -5 10", "Density should not be negative\n");
-	BOOST_CHECK(bodies.empty());
+	BOOST_CHECK(controller.GetVectorOfBodies().empty());
 }
 BOOST_AUTO_TEST_CASE(can_handle_negative_params)
 {
 	VerifyCommandHandling("Sphere 5 -10", "Radius should not be negative\n");
-	BOOST_CHECK(bodies.empty());
+	BOOST_CHECK(controller.GetVectorOfBodies().empty());
 }
 BOOST_AUTO_TEST_CASE(can_handle_compound_body)
 {
 	VerifyCommandHandling("Compound\nSphere 5 10\nFinish\n", "> > Finish add to compound\n");
-	BOOST_CHECK(bodies.size() == 1);
+	BOOST_CHECK(controller.GetVectorOfBodies().size() == 1);
 }
 BOOST_AUTO_TEST_CASE(can_handle_any_bodies)
 {
 	VerifyCommandHandling("Sphere 5 10\n", "");
 	VerifyCommandHandling("Compound\nSphere 5 10\nFinish\n", "> > Finish add to compound\n");
 	VerifyCommandHandling("Compound\nSphere 5 10\nCompound\nCone 1 2 3\nCylinder 4 5 6\nSphere 1 1\nFinish\n", "> > > > > > Finish add to compound\n> Finish add to compound\n");
-	BOOST_CHECK(bodies.size() == 3);
+	BOOST_CHECK(controller.GetVectorOfBodies().size() == 3);
 }
 BOOST_AUTO_TEST_SUITE_END()

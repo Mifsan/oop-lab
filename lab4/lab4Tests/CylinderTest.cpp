@@ -15,7 +15,7 @@ struct Cylinder_
 
 BOOST_FIXTURE_TEST_SUITE(Cylinder_test, Cylinder_)
 
-BOOST_AUTO_TEST_CASE(is_a_body)
+BOOST_AUTO_TEST_CASE(has_a_body_type)
 {
 	BOOST_CHECK(static_cast<const CBody*>(&cylinder));
 }
@@ -37,18 +37,18 @@ BOOST_AUTO_TEST_CASE(has_a_density)
 
 BOOST_AUTO_TEST_CASE(has_a_volume)
 {
-	BOOST_CHECK_CLOSE_FRACTION(static_cast<const CBody &>(cylinder).GetVolume(), expectedVolume, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(cylinder.GetVolume(), expectedVolume, 1e-7);
 }
 
 BOOST_AUTO_TEST_CASE(has_a_mass)
 {
-	BOOST_CHECK_CLOSE_FRACTION(static_cast<const CBody &>(cylinder).GetMass(), expectedVolume * expectedDensity, 1e-7);
+	BOOST_CHECK_CLOSE_FRACTION(cylinder.GetMass(), expectedVolume * expectedDensity, 1e-7);
 }
 
 BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 {
 	const std::string expectedString = "Cylinder:\n\tdensity = 3\n\tvolume = 3078.760801\n\tmass = 9236.282402\n\tbaseRadius = 7\n\theight = 20\n";
-	BOOST_CHECK_EQUAL(static_cast<const CBody &>(cylinder).ToString(), expectedString);
+	BOOST_CHECK_EQUAL(cylinder.ToString(), expectedString);
 }
 BOOST_AUTO_TEST_CASE(can_handle_negative_values)
 {
