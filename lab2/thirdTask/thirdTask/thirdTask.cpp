@@ -10,19 +10,19 @@ static const int MAX_DISCHARGE = 10;
 
 using namespace std;
 
-bool isArgCountEqualToSpecifiedNumOfArg(int argc);
+bool IsArgCountEqualToSpecifiedNumOfArg(int argc);
 
-bool isArgumentLegit(char* arg);
+bool IsArgumentLegit(char* arg);
 
 int main(int argc, char* argv[])
 {
-	if (isArgCountEqualToSpecifiedNumOfArg(argc))
+	if (IsArgCountEqualToSpecifiedNumOfArg(argc))
 	{
 		cout << "Invalid arguments count\n"
 			<< "Usage: thirdTask.exe <Upper bound of values(max processing value: 100000000)>";
 		return 1;
 	}
-	if (!isArgumentLegit(argv[1]))
+	if (!IsArgumentLegit(argv[1]))
 	{
 		return 1;
 	}
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-bool isArgumentLegit(char* arg)
+bool IsArgumentLegit(char* arg)
 {
 	for (size_t i = 0; i < strlen(arg); i++)
 	{
@@ -50,7 +50,7 @@ bool isArgumentLegit(char* arg)
 	return true;
 }
 
-bool isArgCountEqualToSpecifiedNumOfArg(int argc)
+bool IsArgCountEqualToSpecifiedNumOfArg(int argc)
 {
 	return (argc != MAX_NUM_OF_ARG);
 }

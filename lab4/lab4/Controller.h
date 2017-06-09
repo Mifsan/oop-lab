@@ -13,7 +13,7 @@ public:
 	CController(std::istream& input, std::ostream& output);
 
 	bool HandleCommand();
-	bool Help();
+	bool Help() const;
 	void PrintAllBodies() const;
 	void FindBodyWithMaxMass() const;
 	void FindBodyWithSmallestWeight() const;

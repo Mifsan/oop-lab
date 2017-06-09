@@ -3,7 +3,7 @@
 #include "..\HttpUrl\UrlParsingErrorTitles.h"
 #include "..\HttpUrl\UrlParsingError.h"
 
-std::string Information(CHttpUrl curl)
+std::string InformationAbout(CHttpUrl curl)
 {
 	std::string information = "URL: " + curl.GetURL() + "\n";
 	if (curl.GetProtocol() == Protocol::HTTP)
@@ -49,11 +49,11 @@ BOOST_AUTO_TEST_CASE(full_information_about_url)
 {
 	std::string refStr1 = "URL: http://vk.com:77/doc\n\tProtocol: http\n\tDomain: vk.com\n\tPort: 77\n\tDocument: /doc\n";
 	std::string httpUrl = "http://vk.com:77/doc";
-	BOOST_CHECK_EQUAL(Information(CHttpUrl(httpUrl)), refStr1);
+	BOOST_CHECK_EQUAL(InformationAbout(CHttpUrl(httpUrl)), refStr1);
 
 	std::string refStr2 = "URL: https://vk.com:22/doc\n\tProtocol: https\n\tDomain: vk.com\n\tPort: 22\n\tDocument: /doc\n";
 	std::string httpsUrl = "https://vk.com:22/doc";
-	BOOST_CHECK_EQUAL(Information(CHttpUrl(httpsUrl)), refStr2);
+	BOOST_CHECK_EQUAL(InformationAbout(CHttpUrl(httpsUrl)), refStr2);
 }
 
 BOOST_AUTO_TEST_CASE(url_string)

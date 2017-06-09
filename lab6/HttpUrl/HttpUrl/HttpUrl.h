@@ -31,6 +31,7 @@ private:
 	void ParseDocument(std::string const& url) const;
 	Protocol StringToProtocol(std::string protocol);
 	std::string ProtocolToString(Protocol protocol) const;
+
 	std::string m_domain;
 	std::string m_document;
 	Protocol m_protocol;

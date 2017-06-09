@@ -8,10 +8,10 @@ public:
 	bool AddChildBody(std::shared_ptr<CBody> const &element);
 	double GetVolume() const override;
 	double GetMass() const override;
-	void CalculateTheDensity();
+	double GetDensity() const override;
 	size_t NumberOfFigures() const;
 protected:
-	void AppendProperties(std::ostream& strm) const override;
+	void AppendProperties(std::ostream& strm) const override; //различие между протектед и приватной.
 private:
 	std::vector<std::shared_ptr<CBody>> m_elements;
 };

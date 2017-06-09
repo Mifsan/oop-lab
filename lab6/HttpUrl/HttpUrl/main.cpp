@@ -6,7 +6,7 @@
 
 using namespace std;
 
-std::string Information(CHttpUrl curl)
+std::string InformationAbout(CHttpUrl curl)
 {
 	std::string information = "URL: " + curl.GetURL() + "\n";
 	if (curl.GetProtocol() == Protocol::HTTP)
@@ -37,7 +37,7 @@ int main()
 		}
 		try
 		{
-			std::cout << Information(CHttpUrl(url));
+			std::cout << InformationAbout(CHttpUrl(url));
 		}
 		catch (exception const& e)
 		{

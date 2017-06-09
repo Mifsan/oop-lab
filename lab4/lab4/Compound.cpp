@@ -40,15 +40,15 @@ double CCompound::GetVolume() const
 	return volume;
 }
 
-void CCompound::CalculateTheDensity()
+double CCompound::GetDensity() const
 {
 	if (GetVolume() == 0)
 	{
-		m_density = 0;
+		return 0;
 	}
 	else
 	{
-		m_density = GetMass() / GetVolume();
+		return GetMass() / GetVolume();
 	}
 }
 
@@ -56,8 +56,6 @@ size_t CCompound::NumberOfFigures() const
 {
 	return m_elements.size();
 }
-
-
 
 void CCompound::AppendProperties(std::ostream & strm) const
 {

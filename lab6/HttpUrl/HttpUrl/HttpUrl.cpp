@@ -27,17 +27,10 @@ CHttpUrl::CHttpUrl(std::string const & url)
 	}
 	else
 	{
-		try
-		{
-			ParseProtocol(urlCopy);
-			ParseDomain(urlCopy);
-			ParsePort(urlCopy);
-			ParseDocument(urlCopy);
-		}
-		catch (...)
-		{
-			throw;
-		}
+		ParseProtocol(urlCopy);
+		ParseDomain(urlCopy);
+		ParsePort(urlCopy);
+		ParseDocument(urlCopy);
 	}
 }
 
@@ -51,32 +44,25 @@ CHttpUrl::CHttpUrl(std::string const & domain, std::string const & document, Pro
 }
 
 CHttpUrl::CHttpUrl(std::string const & domain, std::string const & document, Protocol protocol, unsigned short port)
-	: m_protocol(StringToProtocol(ProtocolToString(protocol)))
 {
-	try
+	ParseProtocol(ProtocolToString(protocol) + "://");
+	m_protocol = protocol;
+	ParseDomain("http://" + domain);
+	m_domain = domain;
+	ParsePort("http://" + domain + ":" + std::to_string(port));
+	if (port > 0)
 	{
-		ParseDomain("http://" + domain);
-		m_domain = domain;
-		ParsePort("http://" + domain + ":" + std::to_string(port));
-		if (port > 0)
-		{
-			m_port = port;
-		}
-		if (document[0] != '/')
-		{
-			ParseDocument("http://" + domain + "/" + document);
-			m_document = '/' + document;
-		}
-		else
-		{
-			ParseDocument("http://" + domain + document);
-			m_document = document;
-		}
-		
+		m_port = port;
 	}
-	catch (...)
+	if (document[0] != '/')
 	{
-		throw;
+		ParseDocument("http://" + domain + "/" + document);
+		m_document = '/' + document;
+	}
+	else
+	{
+		ParseDocument("http://" + domain + document);
+		m_document = document;
 	}
 }
 
@@ -87,11 +73,8 @@ Protocol CHttpUrl::StringToProtocol(std::string protocolStr)
 		m_port = 80;
 		return Protocol::HTTP;
 	}
-	else if (protocolStr == "https")
-	{
-		m_port = 443;
-		return Protocol::HTTPS;
-	}
+	m_port = 443;
+	return Protocol::HTTPS;
 }
 
 std::string CHttpUrl::ProtocolToString(Protocol protocol) const

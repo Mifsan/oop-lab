@@ -43,7 +43,7 @@ bool CController::HandleCommand()
 	return false;
 }
 
-bool CController::Help()
+bool CController::Help() const
 {
 	m_output << "Commands:\n"
 		<< "> Sphere <density> <radius>\n"
@@ -76,7 +76,7 @@ void CController::FindBodyWithMaxMass() const
 	if (!m_bodies.empty())
 	{
 		auto maxMassBody = m_bodies.front();
-		for (auto body : m_bodies)
+		for (const auto &body : m_bodies)
 		{
 			if (body->GetMass() > maxMassBody->GetMass())
 			{
@@ -104,7 +104,7 @@ void CController::FindBodyWithSmallestWeight() const
 		double minWeight = (minWeightBody->GetDensity() - WATER_DENSITY) * G * minWeightBody->GetVolume();
 		double weight;
 
-		for (auto body : m_bodies)
+		for (const auto &body : m_bodies)
 		{
 			weight = (minWeightBody->GetDensity() - WATER_DENSITY) * G * minWeightBody->GetVolume();
 			if (weight < minWeight)
@@ -144,8 +144,8 @@ bool CController::CreateSphere(std::istream& args)
 	catch (exception const& e)
 	{
 		m_output << e.what();
-		return false;
 	}
+	return false;
 }
 
 bool CController::CreateParallelepiped(std::istream& args)
@@ -168,8 +168,8 @@ bool CController::CreateParallelepiped(std::istream& args)
 	catch (exception const& e)
 	{
 		m_output << e.what();
-		return false;
 	}
+	return false;
 }
 
 bool CController::CreateCone(std::istream& args)
@@ -191,8 +191,8 @@ bool CController::CreateCone(std::istream& args)
 	catch (exception const& e)
 	{
 		m_output << e.what();
-		return false;
 	}
+	return false;
 }
 
 bool CController::CreateCylinder(std::istream& args)
@@ -207,15 +207,15 @@ bool CController::CreateCylinder(std::istream& args)
 		{
 			throw std::invalid_argument("Invalid count of arguments\nUsage: Cylinder <density> <radius> <height>\n");
 		}
-		shared_ptr<CBody> cylinder = make_shared<CCone>(density, radius, height);
+		auto cylinder = make_shared<CCone>(density, radius, height);
 		m_bodies.push_back(cylinder);
 		return true;
 	}
 	catch (exception const& e)
 	{
 		m_output << e.what();
-		return false;
 	}
+	return false;
 }
 
 bool CController::CreateCompoundBody()
@@ -225,7 +225,7 @@ bool CController::CreateCompoundBody()
 	while (m_output << "> ", compoundController.HandleCommand());
 	m_output << "Finish add to compound" "\n";
 	auto elements = compoundController.GetVectorOfBodies();
-	for (auto element : elements)
+	for (const auto &element : elements)
 	{
 		compound->AddChildBody(element);
 	}
