@@ -3,8 +3,8 @@
 #include <new>
 #include <algorithm>
 #include <stdexcept>
-#include <assert.h>
 #include <iterator>
+#include <cassert>
 
 template <typename T>
 class CMyArray
@@ -115,20 +115,12 @@ public:
 
 	void Resize(const size_t newSize)
 	{
-		if (newSize < 0)
-		{
-			throw std::out_of_range("Argument out of range, need non negative number");
-		}
-		auto currSize = GetSize();
 		for (;currSize > newSize; currSize--)
 		{
 			m_end->~T();
 			m_end--;
 		}
-		for (; currSize < newSize; currSize++)
-		{
-			Append(T());
-		}
+
 	}
 
 	CMyArray & operator = (const CMyArray & arr)
@@ -234,6 +226,19 @@ public:
 	}
 
 private:
+
+	static void DestroyItems(T *from, T *to)
+	{
+		// dst - адрес объект, при конструирование которого было выброшено исключение
+		// to - первый скорнструированный объект
+		while (to != from)
+		{
+			--to;
+			// явно вызываем деструктор для шаблонного типа T
+			to->~T();
+		}
+	}
+
 	static void DeleteItems(T *begin, T *end)
 	{
 		// Разрушаем старые элементы
@@ -249,18 +254,6 @@ private:
 		{
 			// Construct "T" at "dstEnd" as a copy of "*begin"
 			new (dstEnd)T(*srcBegin);
-		}
-	}
-
-	static void DestroyItems(T *from, T *to)
-	{
-		// dst - адрес объект, при конструирование которого было выброшено исключение
-		// to - первый скорнструированный объект
-		while (to != from)
-		{
-			--to;
-			// явно вызываем деструктор для шаблонного типа T
-			to->~T();
 		}
 	}
 
@@ -283,6 +276,8 @@ private:
 	void CopyFrom(const CMyArray& arr)
 	{
 		const auto size = arr.GetSize();
+		CMyArray<T> && tempArr;
+		CopyItems(arr.m_begin, arr.m_end, tempArr.m_begin, tempArr.m_end);
 		if (size != 0)
 		{
 			m_begin = RawAlloc(size);
