@@ -56,7 +56,6 @@ BOOST_AUTO_TEST_CASE(iterator_has_postfix_form_of_decrement)
 	auto itEnd = myList.end();
 	itEnd--;
 	auto itBegin = myList.begin();
-	itBegin--;
 	for (auto it = itEnd; it != itBegin; it--)
 	{
 		BOOST_CHECK_EQUAL(*it, expectedVector.checkList[counter]);
@@ -278,7 +277,8 @@ BOOST_AUTO_TEST_CASE(proprely_throws_exeptions)
 	BOOST_REQUIRE_THROW(myList.Erase(myList.end()), std::out_of_range);
 	BOOST_REQUIRE_THROW(myList.end()++, std::out_of_range);
 	BOOST_REQUIRE_THROW(++myList.end(), std::out_of_range);
-	BOOST_REQUIRE_THROW(----myList.begin(), std::out_of_range);
+	BOOST_REQUIRE_THROW(--myList.begin(), std::out_of_range);
+	BOOST_REQUIRE_THROW(myList.begin()--, std::out_of_range);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

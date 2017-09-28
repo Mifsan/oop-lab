@@ -13,10 +13,19 @@ CStringList::CStringList()
 CStringList::CStringList(const CStringList & other)
 	: CStringList()
 {
-	for (auto const & data : other)
+	try
 	{
-		AppendBack(data);
+		for (auto const & data : other)
+		{
+			AppendBack(data);
+		}
 	}
+	catch (...)
+	{
+		Clear();
+		throw;
+	}
+
 }
 
 CStringList::CStringList(CStringList && other)
@@ -209,7 +218,7 @@ CStringList::CIterator & CStringList::CIterator::operator++()
 
 CStringList::CIterator & CStringList::CIterator::operator--()
 {
-	if (m_node->prev != nullptr)
+	if (m_node->prev != nullptr && m_node->prev->prev != nullptr)
 	{
 		m_node = m_node->prev;
 	}
@@ -234,7 +243,14 @@ CStringList::CIterator CStringList::CIterator::operator++(int)
 
 CStringList::CIterator CStringList::CIterator::operator--(int)
 {
-	CIterator tmp = *this;
-	--*this;
-	return tmp;
+	if (m_node->prev != nullptr && m_node->prev->prev != nullptr)
+	{
+		CIterator tmp = *this;
+		--*this;
+		return tmp;
+	}
+	else
+	{
+		throw out_of_range("CStringList iterator not decrementable");
+	}
 }

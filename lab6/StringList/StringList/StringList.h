@@ -9,7 +9,7 @@ class CStringList
 		{
 		}
 		std::string data;
-		Node *prev;
+		Node * prev;
 		std::unique_ptr<Node> next;
 	};
 public:
@@ -28,7 +28,7 @@ public:
 	class CIterator: public std::iterator<std::bidirectional_iterator_tag, std::string>
 	{
 		friend CStringList;
-		CIterator(Node *node);
+		CIterator(Node * node);
 	public:
 		CIterator() = default;
 		std::string & operator*()const;
@@ -40,12 +40,12 @@ public:
 		bool operator==(CIterator const & other)const;
 		bool operator!=(CIterator const & other)const;
 	private:
-		Node *m_node = nullptr;
+		Node * m_node = nullptr;
 	};
 
 	void AppendBack(const std::string & data);
 	void AppendFront(const std::string & data);
-	void Insert(const CIterator & it, const std::string& data);
+	void Insert(const CIterator & it, const std::string & data);
 
 	void Erase(const CIterator & it);
 	void Clear();

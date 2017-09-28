@@ -168,7 +168,7 @@ public:
 			throw std::out_of_range("Index out of range");
 		}
 
-		return m_begin[index];
+		return m_begin[index] const;
 	}
 
 	typedef T* iterator;
@@ -276,14 +276,12 @@ private:
 	void CopyFrom(const CMyArray& arr)
 	{
 		const auto size = arr.GetSize();
-		CMyArray<T> && tempArr;
-		CopyItems(arr.m_begin, arr.m_end, tempArr.m_begin, tempArr.m_end);
 		if (size != 0)
 		{
 			m_begin = RawAlloc(size);
 			try
 			{
-				CopyItems(arr.m_begin, arr.m_end, m_begin, m_end);
+				CopyItems(arr.m_begin, arr.m_end, m_begin, m_end);  /// <==== (1)
 				m_endOfCapacity = m_end;
 			}
 			catch (...)
