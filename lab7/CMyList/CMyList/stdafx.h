@@ -9,14 +9,8 @@
 
 #include <stdio.h>
 #include <tchar.h>
-#include <string>
 #include <memory>
 #include <iterator>
-#include <boost\optional.hpp>
-#include <boost\none.hpp>
-#include <cassert>
-#include <vector>
-#include <map>
-
+#include <optional>
 
 // TODO: reference additional headers your program requires here

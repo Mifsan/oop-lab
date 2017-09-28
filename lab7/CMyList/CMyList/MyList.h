@@ -52,8 +52,8 @@ using namespace std;
 template <typename T>
 CMyList<T>::CMyList()
 {
-	m_firstNode = make_unique<Node<T>>(boost::none, nullptr, nullptr);
-	m_firstNode->next = make_unique<Node<T>>(boost::none, m_firstNode.get(), nullptr);
+	m_firstNode = make_unique<Node<T>>(nullopt, nullptr, nullptr);
+	m_firstNode->next = make_unique<Node<T>>(nullopt, m_firstNode.get(), nullptr);
 	m_lastNode = m_firstNode->next.get();
 }
 
@@ -144,7 +144,7 @@ void CMyList<T>::AppendFront(const T & data)
 template <typename T>
 void CMyList<T>::Insert(const CIterator<T> & it, const T & data)
 {
-	unique_ptr<Node<T>> newNode = make_unique<Node<T>>(data, it.m_node->prev, move(it.m_node->prev->next));
+	unique_ptr<Node<T>> newNode = make_unique<Node<T>>(make_optional(data), it.m_node->prev, move(it.m_node->prev->next));
 	it.m_node->prev = newNode.get();
 	newNode->prev->next = move(newNode);
 	++m_size;
@@ -215,13 +215,13 @@ CIterator<const T> CMyList<T>::cend() const
 template <typename T>
 reverse_iterator<CIterator<T>> CMyList<T>::rbegin()
 {
-	return reverse_iterator<CIterator<T>(end());
+	return reverse_iterator<CIterator<T>>(end());
 }
 
 template <typename T>
 reverse_iterator<CIterator<const T>> CMyList<T>::rbegin() const
 {
-	return reverse_iterator<CIterator<const T>(end());
+	return reverse_iterator<CIterator<const T>>(end());
 }
 
 template <typename T>

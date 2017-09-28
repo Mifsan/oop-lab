@@ -19,7 +19,7 @@ public:
 	{
 		if (m_node != nullptr && m_node->next != nullptr && m_node->prev != nullptr)
 		{
-			return m_node->data;
+			return *m_node->data;
 		}
 		else
 		{

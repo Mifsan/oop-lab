@@ -269,7 +269,7 @@ BOOST_AUTO_TEST_CASE(proprely_throws_exeptions)
 	{
 		myList.AppendBack(expectedVector.stringList[i]);
 	}
-	BOOST_REQUIRE_THROW(myList.Erase(myList.end()), std::runtime_error);
+	BOOST_REQUIRE_THROW(myList.Erase(myList.end()), std::out_of_range);
 	BOOST_REQUIRE_THROW(myList.end()++, std::out_of_range);
 	BOOST_REQUIRE_THROW(++myList.end(), std::out_of_range);
 	BOOST_REQUIRE_THROW(----myList.begin(), std::out_of_range);
@@ -488,7 +488,7 @@ BOOST_AUTO_TEST_CASE(proprely_throws_exeptions)
 	{
 		myList.AppendBack(expectedVector.intList[i]);
 	}
-	BOOST_REQUIRE_THROW(myList.Erase(myList.end()), std::runtime_error);
+	BOOST_REQUIRE_THROW(myList.Erase(myList.end()), std::out_of_range);
 	BOOST_REQUIRE_THROW(myList.end()++, std::out_of_range);
 	BOOST_REQUIRE_THROW(++myList.end(), std::out_of_range);
 	BOOST_REQUIRE_THROW(----myList.begin(), std::out_of_range);

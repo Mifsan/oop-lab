@@ -17,7 +17,6 @@
 #include <string>
 #include <iostream>
 #include <boost/algorithm/string/case_conv.hpp>
-#include <boost/regex.hpp>
 #include <exception>
 
 // TODO: reference additional headers your program requires here
