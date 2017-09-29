@@ -2,6 +2,12 @@
 #include "../CMyList/MyList.h"
 
 
+class CWithoutConstructor
+{
+public:
+	CWithoutConstructor() = delete;
+};
+
 struct WorkingMyList
 {
 	std::vector<std::string> checkStringList = { "Ymiray", "nado", "polychit", "zachet", "po", "OOP" };
@@ -19,6 +25,14 @@ void VerifyList(CMyList<T> & list, const std::vector<T> & expectedList)
 		counter++;
 	}
 }
+
+BOOST_AUTO_TEST_SUITE(CMyList_class_with_data_that_dont_have_constructor)
+BOOST_AUTO_TEST_CASE(can_construct_CMyList_with_data_that_dont_have_constructor)
+{	
+	BOOST_REQUIRE_NO_THROW(CMyList<CWithoutConstructor> lst);
+}
+BOOST_AUTO_TEST_SUITE_END()
+
 
 BOOST_AUTO_TEST_SUITE(with_string)
 
