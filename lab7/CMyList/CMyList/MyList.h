@@ -171,7 +171,6 @@ void CMyList<T>::Clear()
 	{
 		Erase(begin());
 	}
-	m_lastNode->data.reset();
 }
 
 template <typename T>
