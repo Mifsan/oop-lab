@@ -3,11 +3,36 @@
 
 #include "stdafx.h"
 
+static const int ARGUMENTS_COUNT = 2;
+
 using namespace std;
+
+unsigned char FlipBits(const unsigned char number);
+bool IsValidArgument(const char* argv);
+bool IsValidArgumentsCount(const int & argc);
+
+int main(int argc, char* argv[])
+{
+	if (!IsValidArgumentsCount(argc))
+	{
+		cout << "flipbyte.exe using: <natural number less than or equal to 255>" << endl;
+		return 1;
+	}
+	if (!IsValidArgument(argv[1]))
+	{
+		cout << "Invalid argument, argument should be <natural number less than or equal to 255>" << endl;
+		return 1;
+	}
+
+	unsigned char value = atoi(argv[1]);
+	cout << int(FlipBits(value)) << endl;
+
+    return 0;
+}
 
 bool IsValidArgumentsCount(const int & argc)
 {
-	return (argc == 2);
+	return (argc == ARGUMENTS_COUNT);
 }
 
 bool IsValidArgument(const char* argv)
@@ -47,24 +72,5 @@ unsigned char FlipBits(unsigned char number)
 		number = number >> 1;
 	}
 	return result;
-}
-
-int main(int argc, char* argv[])
-{
-	if (!IsValidArgumentsCount(argc))
-	{
-		cout << "flipbyte.exe using: <natural number less than or equal to 255>" << endl;
-		return 1;
-	}
-	if (!IsValidArgument(argv[1]))
-	{
-		cout << "Invalid argument, argument should be <natural number less than or equal to 255>" << endl;
-		return 1;
-	}
-
-	unsigned char value = atoi(argv[1]);
-	cout << int(FlipBits(value)) << endl;
-
-    return 0;
 }
 
